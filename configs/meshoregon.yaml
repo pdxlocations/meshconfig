@@ -1,0 +1,79 @@
+# MeshOregon starter preset.
+# The app replaces owner and owner_short with the live node values before diff/upload.
+owner: Meshtastic 1adc
+owner_short: 1adc
+is_unmessagable: false
+location: null
+config:
+  device:
+    nodeInfoBroadcastSecs: 10800
+    tzdef: PST8PDT,M3.2.0/2:00:00,M11.1.0/2:00:00
+  position:
+    positionBroadcastSecs: 3600
+    positionBroadcastSmartEnabled: true
+    gpsUpdateInterval: 120
+    positionFlags: 811
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 300
+    gpsMode: NOT_PRESENT
+  power:
+    waitBluetoothSecs: 60
+    sdsSecs: 4294967295
+    lsSecs: 300
+    minWakeSecs: 10
+  network:
+    ntpServer: meshtastic.pool.ntp.org
+  display:
+    screenOnSecs: 600
+  lora:
+    bandwidth: 125
+    spreadFactor: 8
+    codingRate: 5
+    region: US
+    hopLimit: 7
+    txEnabled: true
+    txPower: 30
+    sx126xRxBoostedGain: true
+    overrideFrequency: 918.5
+    usePreset: false
+
+module_config:
+  serial: {}
+  externalNotification: {}
+  storeForward: {}
+  rangeTest: {}
+  telemetry:
+    deviceUpdateInterval: 2147483647
+  cannedMessage:
+    enabled: true
+  audio: {}
+  remoteHardware: {}
+  neighborInfo: {}
+  ambientLighting: {}
+  paxcounter: {}
+channels:
+  - settings:
+      psk: AQ==
+      name: MeshOregon
+      moduleSettings:
+        positionPrecision: 15
+    role: PRIMARY
+    index: 0
+  - index: 1
+    settings:
+      psk: BQ==
+      name: Local
+      moduleSettings: {}
+    role: SECONDARY
+  - index: 2
+    settings: {}
+  - index: 3
+    settings: {}
+  - index: 4
+    settings: {}
+  - index: 5
+    settings: {}
+  - index: 6
+    settings: {}
+  - index: 7
+    settings: {}

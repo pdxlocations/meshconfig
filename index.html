@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MeshConfig Workbench</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="backdrop" aria-hidden="true"></div>
+    <main class="shell">
+      <header class="hero">
+        <div class="hero__copy">
+          <p class="eyebrow">Meshtastic Config</p>
+          <h1>Download, diff, push, verify.</h1>
+          <p class="lede">
+            Connect to a node, export the writable config, compare it to the YAML
+            you want, upload changes, then re-read the device to confirm the
+            settings actually stuck.
+          </p>
+        </div>
+        <div class="hero__status">
+          <div class="status-pill" id="status">Disconnected</div>
+          <div class="mini-meta" id="nodeSummary">No node connected</div>
+        </div>
+      </header>
+
+      <section class="panel panel--connect">
+        <div class="panel__header">
+          <div>
+            <p class="panel__kicker">Connection</p>
+            <h2>Node transport</h2>
+          </div>
+          <div class="panel__tools">
+            <button id="connectBtn" class="button button--primary" type="button">
+              Connect
+            </button>
+            <button id="disconnectBtn" class="button button--ghost" type="button" disabled>
+              Disconnect
+            </button>
+          </div>
+        </div>
+
+        <div class="connect-grid">
+          <label class="field">
+            <span>Connection method</span>
+            <select id="connectionType">
+              <option value="serial">Serial (USB)</option>
+              <option value="bluetooth">Bluetooth (Web BLE)</option>
+              <option value="http">HTTP(S)</option>
+            </select>
+          </label>
+
+          <label class="field field--http" id="httpField">
+            <span>Host / IP</span>
+            <input
+              id="httpTarget"
+              type="text"
+              placeholder="meshtastic.local, 10.10.0.57, or 10.10.0.57:8080"
+              autocomplete="off"
+            />
+            <label class="toggle">
+              <input id="tlsToggle" type="checkbox" />
+              <span>Use HTTPS</span>
+            </label>
+          </label>
+
+          <div class="hint-block">
+            Chromium-based browsers are required for Web Serial and Web Bluetooth.
+            Those transports only work on `https://` or `localhost`.
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel--actions">
+        <div class="panel__header">
+          <div>
+            <p class="panel__kicker">Workflow</p>
+            <h2>Live and desired config</h2>
+          </div>
+          <div class="panel__tools panel__tools--wrap">
+            <label class="field field--preset">
+              <span>Desired preset</span>
+              <select id="desiredPreset"></select>
+            </label>
+            <button id="copyLiveBtn" class="button button--ghost" type="button" disabled>
+              Use live as desired
+            </button>
+            <button id="uploadBtn" class="button button--danger" type="button" disabled>
+              Upload desired config
+            </button>
+            <button id="downloadLiveBtn" class="button button--ghost" type="button" disabled>
+              Download YAML
+            </button>
+            <button id="loadDesiredBtn" class="button button--ghost" type="button">
+              Load desired file
+            </button>
+            <input id="desiredFile" type="file" accept=".yaml,.yml,.json,text/yaml,application/json" hidden />
+          </div>
+        </div>
+
+        <div class="workspace">
+          <section class="editor-card">
+            <div class="editor-card__header">
+              <h3>Live node export</h3>
+              <div class="editor-card__meta" id="liveMeta">No download yet</div>
+            </div>
+            <textarea
+              id="liveYaml"
+              class="editor"
+              readonly
+              spellcheck="false"
+              aria-label="Live node YAML"
+            >Connect to a node, then download its config.</textarea>
+          </section>
+
+          <section class="editor-card">
+            <div class="editor-card__header">
+              <h3>Desired YAML</h3>
+              <div class="editor-card__meta" id="desiredMeta">Editable</div>
+            </div>
+            <textarea
+              id="desiredYaml"
+              class="editor"
+              spellcheck="false"
+              aria-label="Desired YAML"
+              placeholder="Paste the config you want to enforce here."
+            ></textarea>
+          </section>
+        </div>
+      </section>
+
+      <section class="panel panel--diffs">
+        <div class="diff-grid">
+          <section class="diff-card">
+            <div class="diff-card__header">
+              <h3>Current diff</h3>
+              <div class="diff-badge" id="currentDiffBadge">No comparison yet</div>
+            </div>
+            <div id="currentDiff" class="diff-output">Download the live config and compare it with your desired YAML.</div>
+          </section>
+
+          <section class="diff-card">
+            <div class="diff-card__header">
+              <h3>Post-upload verification</h3>
+              <div class="diff-badge" id="verifyDiffBadge">No verification yet</div>
+            </div>
+            <div id="verifyDiff" class="diff-output">Upload a desired config to run a second diff against the node.</div>
+          </section>
+        </div>
+      </section>
+
+      <section class="panel panel--log">
+        <div class="panel__header">
+          <div>
+            <p class="panel__kicker">Log</p>
+            <h2>Log</h2>
+          </div>
+          <div class="panel__tools">
+            <button id="clearLogBtn" class="button button--ghost" type="button">Clear log</button>
+          </div>
+        </div>
+        <pre id="log" class="log"></pre>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

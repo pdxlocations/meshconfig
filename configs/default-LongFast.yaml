@@ -1,0 +1,84 @@
+is_unmessagable: false
+location: null
+config:
+  device:
+    nodeInfoBroadcastSecs: 10800
+  position:
+    positionBroadcastSecs: 3600
+    positionBroadcastSmartEnabled: true
+    gpsUpdateInterval: 120
+    positionFlags: 811
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 300
+    gpsMode: NOT_PRESENT
+  power:
+    waitBluetoothSecs: 60
+    sdsSecs: 4294967295
+    lsSecs: 300
+    minWakeSecs: 10
+  network:
+    ntpServer: meshtastic.pool.ntp.org
+  display:
+    screenOnSecs: 600
+  lora:
+    usePreset: true
+    bandwidth: 250
+    spreadFactor: 11
+    hopLimit: 3
+    txEnabled: true
+    txPower: 30
+    sx126xRxBoostedGain: true
+  bluetooth:
+    enabled: true
+    fixedPin: 123456
+  security:
+    serialEnabled: true
+  deviceUi: {}
+module_config:
+  mqtt:
+    address: mqtt.meshtastic.org
+    username: meshdev
+    password: large4cats
+    encryptionEnabled: true
+    root: msh
+  serial: {}
+  externalNotification: {}
+  storeForward: {}
+  rangeTest: {}
+  telemetry:
+    deviceUpdateInterval: 2147483647
+  cannedMessage:
+    enabled: true
+  audio: {}
+  remoteHardware: {}
+  neighborInfo: {}
+  ambientLighting:
+    current: 10
+    red: 157
+    green: 26
+    blue: 220
+  detectionSensor:
+    minimumBroadcastSecs: 45
+    detectionTriggerType: LOGIC_HIGH
+  paxcounter: {}
+channels:
+  - settings:
+      psk: AQ==
+      moduleSettings:
+        positionPrecision: 13
+    role: PRIMARY
+    index: 0
+  - index: 1
+    settings: {}
+  - index: 2
+    settings: {}
+  - index: 3
+    settings: {}
+  - index: 4
+    settings: {}
+  - index: 5
+    settings: {}
+  - index: 6
+    settings: {}
+  - index: 7
+    settings: {}
