@@ -40,3 +40,5 @@ It assumes the app is installed at `/opt/meshconfig` and uses a dynamic service 
 - The app accepts YAML or JSON in the desired editor. Snake-case top-level keys from the Meshtastic Python config format are supported.
 - The desired-config dropdown loads preset files from this repo, and `MeshOregon` is the default preset on startup.
 - [desired-config.yaml](/Users/benlipsey/Meshtastic/_github/pdxlocations/meshconfig/desired-config.yaml) remains an editable preset option in the dropdown.
+
+Meshtastic® is a registered trademark of Meshtastic LLC. Meshtastic software components are released under various licenses, see GitHub for details. No warranty is provided - use at your own risk.
