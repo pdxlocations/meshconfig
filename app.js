@@ -890,6 +890,31 @@ function formatDiffValue(value) {
   return `<pre class="diff-value">${escapeHtml(pretty)}</pre>`;
 }
 
+function serializeDiffPart(value) {
+  return value === undefined ? "__undefined__" : JSON.stringify(value);
+}
+
+function dedupeDiffChanges(changes) {
+  const seen = new Set();
+  const deduped = [];
+
+  for (const change of changes) {
+    const key = [
+      change.kind,
+      change.path,
+      serializeDiffPart(change.actual),
+      serializeDiffPart(change.desired),
+    ].join("\u0000");
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    deduped.push(change);
+  }
+
+  return deduped;
+}
+
 function renderDiff(target, badge, changes, idleText) {
   if (!changes) {
     target.textContent = idleText;
@@ -897,13 +922,15 @@ function renderDiff(target, badge, changes, idleText) {
     return;
   }
 
-  if (!changes.length) {
+  const renderedChanges = dedupeDiffChanges(changes);
+
+  if (!renderedChanges.length) {
     target.innerHTML = '<div class="diff-empty">No differences.</div>';
     badge.textContent = "In sync";
     return;
   }
 
-  target.innerHTML = changes
+  target.innerHTML = renderedChanges
     .map((change) => {
       const kindLabel = change.kind === "+" ? "Missing" : change.kind === "-" ? "Extra" : "Changed";
       const kindClass = change.kind === "+" ? "added" : change.kind === "-" ? "removed" : "changed";
@@ -927,7 +954,7 @@ function renderDiff(target, badge, changes, idleText) {
       `;
     })
     .join("");
-  badge.textContent = `${changes.length} change${changes.length === 1 ? "" : "s"}`;
+  badge.textContent = `${renderedChanges.length} change${renderedChanges.length === 1 ? "" : "s"}`;
 }
 
 function diffDesiredAgainstLive(actual, desired, path = "root", changes = []) {
