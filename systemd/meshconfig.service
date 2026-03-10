@@ -1,0 +1,17 @@
+[Unit]
+Description=MeshConfig Workbench static web server
+After=network.target
+
+[Service]
+Type=simple
+User=meshconfig
+Group=meshconfig
+WorkingDirectory=/opt/meshconfig
+Environment=HOST=0.0.0.0
+Environment=PORT=8420
+ExecStart=/opt/meshconfig/scripts/launch.sh
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

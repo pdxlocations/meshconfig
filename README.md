@@ -7,15 +7,6 @@ Static web app for direct Meshtastic config work:
 - compare live config to a desired YAML document
 - upload the desired config back to the node
 
-## References used
-
-- `https://github.com/pdxlocations/nodesnoop`
-  - browser transport patterns for Web Serial and HTTP/BLE connection flow
-- `https://github.com/meshtastic/js`
-  - `MeshDevice` admin/config packet APIs
-- `https://github.com/meshtastic/python`
-  - `--export-config` structure and configure transaction order
-
 ## Run locally
 
 Serve this directory from a static web server:
@@ -29,6 +20,18 @@ Then open:
 ```text
 http://localhost:8420
 ```
+
+Or use the launcher script:
+
+```sh
+./scripts/launch.sh
+```
+
+## systemd
+
+A sample systemd unit is included at systemd/meshconfig.service.
+
+It assumes the app is installed at `/opt/meshconfig` and runs as a `meshconfig` user/group, so adjust those values before installing it.
 
 ## Notes
 
