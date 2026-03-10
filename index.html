@@ -64,9 +64,10 @@
               placeholder="meshtastic.local, 10.10.0.57, or 10.10.0.57:8080"
               autocomplete="off"
             />
-            <label class="toggle">
-              <input id="tlsToggle" type="checkbox" />
-              <span>Use HTTPS</span>
+            <label class="toggle" for="tlsToggle">
+              <input id="tlsToggle" class="toggle__input" type="checkbox" />
+              <span class="toggle__slider" aria-hidden="true"></span>
+              <span class="toggle__label">Use HTTPS</span>
             </label>
           </label>
 

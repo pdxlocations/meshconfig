@@ -1,5 +1,6 @@
 import { create, fromBinary, fromJson, toBinary, toJson } from "https://esm.sh/@bufbuild/protobuf@2.2.5";
 import { MeshDevice, Protobuf } from "https://esm.sh/jsr/@meshtastic/core@2.6.6";
+import { TransportHTTP } from "https://esm.sh/jsr/@meshtastic/transport-http@0.2.1";
 import yaml from "https://esm.sh/js-yaml@4.1.0";
 
 const CURRENT_DIFF_IDLE_TEXT = "Download the live config and compare it with your desired YAML.";
@@ -217,95 +218,6 @@ class WebBluetoothTransport {
     } catch {
       // Ignore disconnect failures.
     }
-  }
-}
-
-class HttpTransport {
-  static async create(address, tls = false) {
-    const url = `${tls ? "https" : "http"}://${address}`;
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
-    try {
-      const response = await fetch(`${url}/json/report`, {
-        method: "GET",
-        cache: "no-store",
-        mode: "cors",
-        signal: controller.signal,
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP reachability test failed with ${response.status}`);
-      }
-    } finally {
-      clearTimeout(timeoutId);
-    }
-    return new HttpTransport(url);
-  }
-
-  constructor(url) {
-    this.url = url;
-    this.closed = false;
-    this.fetchIntervalMs = 2500;
-    this.readAbortController = new AbortController();
-
-    this._toDevice = new WritableStream({
-      write: async (chunk) => {
-        await fetch(`${this.url}/api/v1/toradio`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/x-protobuf" },
-          body: chunk,
-        });
-      },
-    });
-
-    this._fromDevice = new ReadableStream({
-      start: (controller) => {
-        this.controller = controller;
-        this.poll();
-      },
-    });
-  }
-
-  get toDevice() {
-    return this._toDevice;
-  }
-
-  get fromDevice() {
-    return this._fromDevice;
-  }
-
-  async poll() {
-    while (!this.closed) {
-      try {
-        let readBuffer = new ArrayBuffer(1);
-        while (!this.closed && readBuffer.byteLength > 0) {
-          const response = await fetch(`${this.url}/api/v1/fromradio?all=false`, {
-            method: "GET",
-            headers: { Accept: "application/x-protobuf" },
-            signal: this.readAbortController.signal,
-          });
-          readBuffer = await response.arrayBuffer();
-          if (readBuffer.byteLength > 0) {
-            this.controller?.enqueue({
-              type: "packet",
-              data: new Uint8Array(readBuffer),
-            });
-          }
-        }
-      } catch (error) {
-        if (!this.closed) {
-          log(`HTTP poll warning: ${error?.message ?? error}`);
-        }
-      }
-
-      if (!this.closed) {
-        await sleep(this.fetchIntervalMs);
-      }
-    }
-  }
-
-  async disconnect() {
-    this.closed = true;
-    this.readAbortController.abort();
   }
 }
 
@@ -1292,10 +1204,17 @@ function parseHttpTarget(input, tlsFlag) {
   if (host.startsWith("http://")) {
     tls = false;
     host = host.replace(/^http:\/\//, "");
+  } else if (host.startsWith("http:")) {
+    tls = false;
+    host = host.replace(/^http:/, "");
   } else if (host.startsWith("https://")) {
     tls = true;
     host = host.replace(/^https:\/\//, "");
+  } else if (host.startsWith("https:")) {
+    tls = true;
+    host = host.replace(/^https:/, "");
   }
+  host = host.replace(/^\/+/, "");
   if (host.includes("/")) {
     host = host.split("/")[0];
   }
@@ -1889,7 +1808,7 @@ async function connect() {
       if (!target?.host) {
         throw new Error("HTTP connection requires a host or IP.");
       }
-      transport = await HttpTransport.create(target.host, target.tls);
+      transport = await TransportHTTP.create(target.host, target.tls);
       log(`Using HTTP transport ${target.tls ? "https" : "http"}://${target.host}`);
     }
 
