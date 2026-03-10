@@ -6,8 +6,11 @@ Static web app for direct Meshtastic config work:
 - download the node's writable config as YAML
 - compare live config to a desired YAML document
 - upload the desired config back to the node
+<img width="1368" height="812" alt="Screenshot 2026-03-10 at 8 23 42 AM" src="https://github.com/user-attachments/assets/894df732-e620-4f05-88ab-8f05a311a793" />
+<img width="1379" height="1080" alt="Screenshot 2026-03-10 at 8 24 10 AM" src="https://github.com/user-attachments/assets/152935f2-1e2a-404a-9ef4-b338515c2d89" />
 
 ## Run locally
+
 
 Serve this directory from a static web server:
 
