@@ -6,7 +6,6 @@ Static web app for direct Meshtastic config work:
 - download the node's writable config as YAML
 - compare live config to a desired YAML document
 - upload the desired config back to the node
-- re-read the node and diff again to verify the settings stuck
 
 ## References used
 

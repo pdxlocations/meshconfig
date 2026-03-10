@@ -379,8 +379,6 @@ const elements = {
   desiredMeta: document.getElementById("desiredMeta"),
   currentDiff: document.getElementById("currentDiff"),
   currentDiffBadge: document.getElementById("currentDiffBadge"),
-  verifyDiff: document.getElementById("verifyDiff"),
-  verifyDiffBadge: document.getElementById("verifyDiffBadge"),
   log: document.getElementById("log"),
   clearLogBtn: document.getElementById("clearLogBtn"),
 };
@@ -874,11 +872,6 @@ function getEffectiveDesiredConfig({ updateEditor = false } = {}) {
   return desired;
 }
 
-function clearVerification() {
-  elements.verifyDiff.textContent = "Upload a desired config to run a second diff against the node.";
-  elements.verifyDiffBadge.textContent = "No verification yet";
-}
-
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -982,7 +975,6 @@ function compareLiveAndDesired() {
     changes,
     "Download the live config and compare it with your desired YAML.",
   );
-  clearVerification();
   setControls();
   return desired;
 }
@@ -1600,25 +1592,8 @@ async function uploadDesiredConfig() {
     throw error;
   }
 
-  await sleep(1200);
-  const refreshed = await downloadLiveConfig();
-  const verificationChanges = diffDesiredAgainstLive(
-    normalizeExportDocument(refreshed, { applyBooleanDefaults: true }),
-    desired,
-  );
-  renderDiff(
-    elements.verifyDiff,
-    elements.verifyDiffBadge,
-    verificationChanges,
-    "Upload a desired config to run a second diff against the node.",
-  );
-
-  setStatus(verificationChanges.length ? "Connected with drift" : "Connected and verified", verificationChanges.length ? "warn" : "success");
-  log(
-    verificationChanges.length
-      ? `Verification found ${verificationChanges.length} mismatch(es).`
-      : "Verification diff is clean.",
-  );
+  setStatus("Connected", "success");
+  log("Upload complete.");
 }
 
 async function connect() {
@@ -1755,7 +1730,6 @@ elements.copyLiveBtn.addEventListener("click", () => {
     [],
     "Download the live config and compare it with your desired YAML.",
   );
-  clearVerification();
 });
 elements.uploadBtn.addEventListener("click", () =>
   withTask(async () => {
