@@ -35,6 +35,7 @@ channels:
     settings:
       psk: BQ==
       name: Local
+      moduleSettings: {}
     role: SECONDARY
   - index: 2
     settings: {}
