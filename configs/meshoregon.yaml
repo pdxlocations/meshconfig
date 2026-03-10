@@ -1,9 +1,6 @@
 # MeshOregon starter preset.
 # The app replaces owner and owner_short with the live node values before diff/upload.
-owner: Meshtastic 1adc
-owner_short: 1adc
 is_unmessagable: false
-location: null
 config:
   device:
     nodeInfoBroadcastSecs: 10800
