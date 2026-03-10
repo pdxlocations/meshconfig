@@ -31,7 +31,7 @@ Or use the launcher script:
 
 A sample systemd unit is included at systemd/meshconfig.service.
 
-It assumes the app is installed at `/opt/meshconfig` and runs as a `meshconfig` user/group, so adjust those values before installing it.
+It assumes the app is installed at `/opt/meshconfig` and uses a dynamic service user, so you only need to adjust the install path if yours is different.
 
 ## Notes
 
