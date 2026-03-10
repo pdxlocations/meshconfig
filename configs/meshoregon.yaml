@@ -1,6 +1,6 @@
 # MeshOregon starter preset.
 # The app replaces owner and owner_short with the live node values before diff/upload.
-is_unmessagable: false
+is_unmessagable: {}
 config:
   device:
     nodeInfoBroadcastSecs: 43200
