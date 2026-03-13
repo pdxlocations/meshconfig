@@ -30,6 +30,8 @@ module_config:
     enabled: false
   neighborInfo:
     enabled: false
+  paxCounter:
+    enabled: false
 channels:
   - settings:
       psk: AQ==
@@ -56,4 +58,3 @@ channels:
     settings: {}
   - index: 7
     settings: {}
-    
