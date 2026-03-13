@@ -22,8 +22,14 @@ config:
     overrideFrequency: 918.5
     usePreset: false
 module_config:
+  storeForward:
+    enabled: false
   telemetry:
     deviceUpdateInterval: 2147483647
+  rangeTest:
+    enabled: false
+  neighborInfo:
+    enabled: false
 channels:
   - settings:
       psk: AQ==
