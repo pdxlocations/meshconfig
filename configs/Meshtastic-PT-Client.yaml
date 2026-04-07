@@ -1,0 +1,115 @@
+owner: NAME_CHANGE-CL-8
+owner_short: CHAN
+is_unmessagable: false
+config:
+  device:
+    role: CLIENT
+    nodeInfoBroadcastSecs: 43200
+    tzdef: WET0WEST,M3.5.0/1,M10.5.0
+    rebroadcastMode: CORE_PORTNUMS_ONLY
+  position:
+    positionBroadcastSecs: 3600
+    positionBroadcastSmartEnabled: true
+    gpsUpdateInterval: 1800
+    positionFlags: 811
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 1800
+    gpsEnGpio: 34
+    gpsMode: ENABLED
+  power:
+    waitBluetoothSecs: 60
+    sdsSecs: 4294967295
+    lsSecs: 300
+    minWakeSecs: 10
+  network:
+    ntpServer: meshtastic.pool.ntp.org
+  display:
+    screenOnSecs: 600
+  lora:
+    usePreset: true
+    bandwidth: 250
+    spreadFactor: 11
+    codingRate: 5
+    region: EU_868
+    hopLimit: 4
+    txEnabled: true
+    txPower: 25
+    channelNum: 1
+    sx126xRxBoostedGain: true
+    configOkToMqtt: true
+  bluetooth:
+    enabled: true
+    fixedPin: 123456
+  security:
+    serialEnabled: true
+  deviceUi: {}
+module_config:
+  mqtt:
+    enabled: true
+    address: mqtt.meshtastic.pt
+    username: meshdev
+    password: large4cats
+    encryptionEnabled: true
+    root: msh
+    mapReportingEnabled: true
+    mapReportSettings:
+      publishIntervalSecs: 3600
+      positionPrecision: 14
+      shouldReportLocation: true
+  serial: {}
+  externalNotification: {}
+  storeForward: {}
+  rangeTest: {}
+  telemetry:
+    deviceUpdateInterval: 2147483647
+  cannedMessage:
+    enabled: true
+  audio: {}
+  remoteHardware: {}
+  neighborInfo: {}
+  ambientLighting:
+    current: 10
+    red: 156
+    green: 9
+    blue: 112
+  detectionSensor:
+    minimumBroadcastSecs: 45
+    detectionTriggerType: LOGIC_HIGH
+  paxcounter: {}
+channels:
+  - settings:
+      psk: AQ==
+      uplinkEnabled: true
+      downlinkEnabled: true
+      moduleSettings:
+        positionPrecision: 15
+    role: PRIMARY
+    index: 0
+  - index: 1
+    settings:
+      psk: AQ==
+      name: SOS
+      uplinkEnabled: true
+      downlinkEnabled: true
+      moduleSettings:
+        positionPrecision: 15
+    role: SECONDARY
+  - index: 2
+    settings:
+      psk: AQ==
+      name: Iberia
+      uplinkEnabled: true
+      downlinkEnabled: true
+      moduleSettings:
+        positionPrecision: 15
+    role: SECONDARY
+  - index: 3
+    settings: {}
+  - index: 4
+    settings: {}
+  - index: 5
+    settings: {}
+  - index: 6
+    settings: {}
+  - index: 7
+    settings: {}
