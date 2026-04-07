@@ -1339,7 +1339,7 @@ function resolvePendingAdminResponses(adminMessage) {
   state.pendingAdminResponses = remaining;
 }
 
-function waitForAdminResponse(matcher, timeoutMs = 5000) {
+function waitForAdminResponse(matcher, timeoutMs = 15000) {
   return new Promise((resolve, reject) => {
     const timeoutId = setTimeout(() => {
       state.pendingAdminResponses = state.pendingAdminResponses.filter((pending) => pending.timeoutId !== timeoutId);
