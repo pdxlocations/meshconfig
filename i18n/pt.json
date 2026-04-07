@@ -1,6 +1,7 @@
 {
 "header": {
     "title": "Configurador Meshtastic",
-    "punchline": "Baixe, compare, envie."
+    "punchline": "Baixe, compare, envie.",
+    "description": "Conecte-se a um nó, exporte a configuração editável, compare-a com o YAML desejado e envie as alterações de volta para o dispositivo."
 }
 }

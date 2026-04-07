@@ -1,6 +1,7 @@
 {
 "header": {
     "title": "Meshtastic Configurator",
-    "punchline": "Download, diff, push."
+    "punchline": "Download, diff, push.",
+    "description": "Connect to a node, export the writable config, compare it to the YAML you want, and upload changes back to the device."
 }
 }
