@@ -1,3 +1,4 @@
+# start of Meshtastic configure yaml
 canned_messages: Hi|Bye|Yes|No|Ok
 config:
   bluetooth:
@@ -6,7 +7,7 @@ config:
   device:
     nodeInfoBroadcastSecs: 10800
     rebroadcastMode: CORE_PORTNUMS_ONLY
-    role: CLIENT
+    role: CLIENT_MUTE
     tzdef: WET0WEST,M3.5.0/1:00:00,M10.4.0/2:00:00
   display:
     screenOnSecs: 600
@@ -15,7 +16,7 @@ config:
     channelNum: 1
     codingRate: 5
     configOkToMqtt: true
-    hopLimit: 4
+    hopLimit: 5
     region: EU_868
     spreadFactor: 11
     sx126xRxBoostedGain: true
@@ -33,7 +34,7 @@ config:
     gpsMode: NOT_PRESENT
     gpsUpdateInterval: 120
     positionBroadcastSecs: 7200
-    positionBroadcastSmartEnabled: false
+    positionBroadcastSmartEnabled: true
     positionFlags: 811
   power:
     lsSecs: 300
@@ -65,7 +66,7 @@ module_config:
     encryptionEnabled: true
     mapReportSettings:
       positionPrecision: 14
-      publishIntervalSecs: 7200
+      publishIntervalSecs: 3600
       shouldReportLocation: true
     mapReportingEnabled: true
     password: large4cats
@@ -76,8 +77,8 @@ module_config:
     paxcounterUpdateInterval: 900
   telemetry:
     deviceUpdateInterval: 2147483647
-owner: "Change_Me-C-8"
-owner_short: C8
+owner: "Change_Me-8"
+owner_short: CM8
 channels:
   - settings:
       psk: AQ==

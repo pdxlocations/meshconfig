@@ -4,9 +4,9 @@ config:
     enabled: true
     fixedPin: 123456
   device:
-    nodeInfoBroadcastSecs: 10800
+    nodeInfoBroadcastSecs: 43200
     rebroadcastMode: CORE_PORTNUMS_ONLY
-    role: CLIENT
+    role: ROUTER_LATE
     tzdef: WET0WEST,M3.5.0/1:00:00,M10.4.0/2:00:00
   display:
     screenOnSecs: 600
@@ -32,7 +32,7 @@ config:
     broadcastSmartMinimumIntervalSecs: 300
     gpsMode: NOT_PRESENT
     gpsUpdateInterval: 120
-    positionBroadcastSecs: 7200
+    positionBroadcastSecs: 14400
     positionBroadcastSmartEnabled: false
     positionFlags: 811
   power:
@@ -76,8 +76,8 @@ module_config:
     paxcounterUpdateInterval: 900
   telemetry:
     deviceUpdateInterval: 2147483647
-owner: "Change_Me-C-8"
-owner_short: C8
+owner: "Change_Me-RL-8"
+owner_short: RL-8
 channels:
   - settings:
       psk: AQ==
