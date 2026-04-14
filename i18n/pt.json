@@ -1,0 +1,41 @@
+{
+    "header": {
+        "title": "Configurador Meshtastic",
+        "punchline": "Download, compare, envie.",
+        "description": "Conecte-se a um nó, exporte a configuração editável, compare-a com o YAML desejado e envie as alterações de volta para o dispositivo.",
+        "status": "Desconectado",
+        "nodeSummary": "Nenhum nó conectado"
+    },
+    "connection": {
+        "title": "Conexão",
+        "punchline": "Transporte do nó",
+        "bntconnect": "Conectar",
+        "bntdisconnect": "Desconectar",
+        "connectionType": "Método de conexão",
+        "usehttps": "Usar HTTPS",
+        "description": "São necessários browsers baseados em Chromium para Web Serial e Web Bluetooth. Esses transportes só funcionam em `https://` ou `localhost`."
+    },
+    "workflow": {
+        "title": "Fluxo de trabalho",
+        "punchline": "Configuração actual/desejada",
+        "desiredpreset": "Predefinição desejada",
+        "bntuselive": "Usar configuração atual",
+        "bntupload": "Enviar configuração",
+        "bntdownloadyaml": "Download do YAML",
+        "bntloaddesired": "Carregar configuração",
+        "livenode_title": "Exportação do nó ao vivo",
+        "livenode_status": "Nenhum download ainda",
+        "livenode_status_msg": "Conecte-se a um nó, então baixe sua configuração.",
+        "desired_title": "YAML desejado"
+    },
+    "diff": {
+        "title": "Diferença",
+        "punchline": "Diferença atual",
+        "bntrefresh": "Atualizar diferença",
+        "status": "Nenhuma comparação ainda"
+    },
+    "logbox": {
+        "title": "Log",
+        "bntclearlog": "Limpar log"
+    }
+}

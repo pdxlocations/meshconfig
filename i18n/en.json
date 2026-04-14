@@ -1,0 +1,41 @@
+{
+    "header": {
+        "title": "Meshtastic Configurator",
+        "punchline": "Download, diff, push.",
+        "description": "Connect to a node, export the writable config, compare it to the YAML you want, and upload changes back to the device.",
+        "status": "Disconnected",
+        "nodeSummary": "No node connected"
+    },
+    "connection": {
+        "title": "Connection",
+        "punchline": "Node transport",
+        "bntconnect": "Connect",
+        "bntdisconnect": "Disconnect",
+        "connectionType": "Connection method",
+        "usehttps": "Use HTTPS",
+        "description": "Chromium-based browsers are required for Web Serial and Web Bluetooth. Those transports only work on `https://` or `localhost`."
+    },
+    "workflow": {
+        "title": "Workflow",
+        "punchline": "Live and desired config",
+        "desiredpreset": "Desired preset",
+        "bntuselive": "Use live as desired",
+        "bntupload": "Upload desired config",
+        "bntdownloadyaml": "Download YAML",
+        "bntloaddesired": "Load desired file",
+        "livenode_title": "Live node export",
+        "livenode_status": "No download yet",
+        "livenode_status_msg": "Connect to a node, then download its config.",
+        "desired_title": "Desired YAML"
+    },
+    "diff": {
+        "title": "Diff",
+        "punchline": "Current diff",
+        "bntrefresh": "Refresh diff",
+        "status": "No comparison yet"
+    },
+    "logbox": {
+        "title": "Log",
+        "bntclearlog": "Clear log"
+    }
+}

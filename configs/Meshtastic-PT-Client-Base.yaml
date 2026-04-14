@@ -1,0 +1,116 @@
+config:
+  bluetooth:
+    enabled: true
+    fixedPin: 123456
+  device:
+    nodeInfoBroadcastSecs: 43200
+    rebroadcastMode: CORE_PORTNUMS_ONLY
+    role: CLIENT_BASE
+    tzdef: WET0WEST,M3.5.0/1:00:00,M10.4.0/2:00:00
+  display:
+    screenOnSecs: 600
+  lora:
+    bandwidth: 250
+    channelNum: 1
+    codingRate: 5
+    configOkToMqtt: true
+    hopLimit: 4
+    region: EU_868
+    spreadFactor: 11
+    sx126xRxBoostedGain: true
+    txEnabled: true
+    txPower: 27
+    usePreset: true
+  network:
+    enabledProtocols: 1
+    wifiEnabled: false
+    wifiPsk:
+    wifiSsid:
+  position:
+    broadcastSmartMinimumDistance: 150
+    broadcastSmartMinimumIntervalSecs: 300
+    gpsMode: NOT_PRESENT
+    gpsUpdateInterval: 120
+    positionBroadcastSecs: 14400
+    positionBroadcastSmartEnabled: false
+    positionFlags: 811
+  power:
+    lsSecs: 300
+    minWakeSecs: 10
+    sdsSecs: 4294967295
+    waitBluetoothSecs: 60
+  security:
+    adminKey:
+    - 'base64:'
+    - 'base64:'
+    - 'base64:'
+    privateKey: 
+    publicKey: 
+    serialEnabled: true
+module_config:
+  ambientLighting:
+    blue: 180
+    current: 10
+    green: 104
+    red: 224
+  cannedMessage:
+    enabled: true
+  detectionSensor:
+    detectionTriggerType: LOGIC_HIGH
+    minimumBroadcastSecs: 45
+  mqtt:
+    address: mqtt.meshtastic.pt
+    enabled: true
+    encryptionEnabled: true
+    mapReportSettings:
+      positionPrecision: 14
+      publishIntervalSecs: 7200
+      shouldReportLocation: true
+    mapReportingEnabled: true
+    password: large4cats
+    proxyToClientEnabled: true
+    root: msh
+    username: meshdev
+  paxcounter:
+    paxcounterUpdateInterval: 900
+  telemetry:
+    deviceUpdateInterval: 2147483647
+owner: "Change_Me-GT-8"
+owner_short: GT8
+channels:
+  - settings:
+      psk: AQ==
+      uplinkEnabled: true
+      downlinkEnabled: true
+      moduleSettings:
+        positionPrecision: 15
+    role: PRIMARY
+    index: 0
+  - index: 1
+    settings:
+      psk: AQ==
+      name: SOS
+      uplinkEnabled: true
+      downlinkEnabled: true
+      moduleSettings:
+        positionPrecision: 15
+    role: SECONDARY
+  - index: 2
+    settings:
+      psk: AQ==
+      name: Iberia
+      uplinkEnabled: true
+      downlinkEnabled: true
+      moduleSettings:
+        positionPrecision: 15
+    role: SECONDARY
+  - index: 3
+    settings: {}
+  - index: 4
+    settings: {}
+  - index: 5
+    settings: {}
+  - index: 6
+    settings: {}
+  - index: 7
+    settings: {}

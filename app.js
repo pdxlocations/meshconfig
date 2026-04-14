@@ -1339,7 +1339,7 @@ function resolvePendingAdminResponses(adminMessage) {
   state.pendingAdminResponses = remaining;
 }
 
-function waitForAdminResponse(matcher, timeoutMs = 5000) {
+function waitForAdminResponse(matcher, timeoutMs = 20000) {
   return new Promise((resolve, reject) => {
     const timeoutId = setTimeout(() => {
       state.pendingAdminResponses = state.pendingAdminResponses.filter((pending) => pending.timeoutId !== timeoutId);
@@ -1771,8 +1771,8 @@ async function uploadDesiredConfig() {
     throw error;
   }
 
-  log("Upload complete. Waiting 15 seconds for node reboot.");
-  await sleep(15000);
+  log("Upload complete. Waiting 20 seconds for node reboot.");
+  await sleep(20000);
   log("Refreshing live config.");
   await downloadLiveConfig({ scrollToTopOnCoreRender: true });
   compareLiveAndDesired();
