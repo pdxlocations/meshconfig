@@ -1,6 +1,7 @@
 config:
   bluetooth:
     enabled: true
+    mode: FIXED_PIN
     fixedPin: 123456
   device:
     nodeInfoBroadcastSecs: 43200
