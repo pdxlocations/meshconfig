@@ -1,0 +1,41 @@
+{
+  "header": {
+    "title": "Meshtastic Конфигуратор",
+    "punchline": "Изтегли, сравни, качи.",
+    "description": "Свържи се с възел, експортирай конфигурацията за редакция, сравни я с желаната YAML конфигурация и качи промените обратно към устройството.",
+    "status": "Изключен",
+    "nodeSummary": "Няма свързан възел"
+  },
+  "connection": {
+    "title": "Връзка",
+    "punchline": "Свързване с възел",
+    "bntconnect": "Свържи",
+    "bntdisconnect": "Прекъсни връзката",
+    "connectionType": "Метод на свързване",
+    "usehttps": "Използвай HTTPS",
+    "description": "За Web Serial и Web Bluetooth са необходими браузъри, базирани на Chromium. Тези методи работят само през `https://` или `localhost`."
+  },
+  "workflow": {
+    "title": "Работен процес",
+    "punchline": "Текуща и желана конфигурация",
+    "desiredpreset": "Желан профил",
+    "bntuselive": "Използвай текущата като желана",
+    "bntupload": "Качи желаната конфигурация",
+    "bntdownloadyaml": "Изтегли YAML",
+    "bntloaddesired": "Зареди желан файл",
+    "livenode_title": "Експортирана конфигурация от възела",
+    "livenode_status": "Все още няма изтеглена конфигурация",
+    "livenode_status_msg": "Свържи се с възел и след това изтегли неговата конфигурация.",
+    "desired_title": "Желана YAML конфигурация"
+  },
+  "diff": {
+    "title": "Разлики",
+    "punchline": "Текущи разлики",
+    "bntrefresh": "Обнови сравняването",
+    "status": "Все още няма сравнение"
+  },
+  "logbox": {
+    "title": "Дневник",
+    "bntclearlog": "Изчисти дневника"
+  }
+}
