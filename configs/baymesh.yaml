@@ -22,7 +22,7 @@ config:
     usePreset: true
     modemPreset: MEDIUM_FAST
     bandwidth: 250
-    spreadFactor: 10
+    spreadFactor: 9
     codingRate: 5
     region: US
     hopLimit: 6
