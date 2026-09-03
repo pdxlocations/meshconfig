@@ -297,6 +297,8 @@ const elements = {
   refreshDiffBtn: document.getElementById("refreshDiffBtn"),
   log: document.getElementById("log"),
   clearLogBtn: document.getElementById("clearLogBtn"),
+  longNameInput: document.getElementById("longNameInput"),
+  shortNameInput: document.getElementById("shortNameInput"),
 };
 
 const state = {
@@ -818,6 +820,7 @@ function setDesiredConfig(config, { preserveTextarea = false } = {}) {
     elements.desiredYaml.value = dumpYaml(orderedConfig);
   }
   elements.desiredMeta.textContent = orderedConfig ? "Parsed and ready" : "Editable";
+  syncIdentityFromYaml();
   setControls();
 }
 
@@ -1148,6 +1151,7 @@ async function loadDesiredConfigFromText(text, metaLabel) {
   const parsed = applyLiveNamesToDesired(parseDesiredYaml());
   setDesiredConfig(parsed);
   elements.desiredMeta.textContent = metaLabel;
+  syncIdentityFromYaml();
   setControls();
 }
 
@@ -1189,6 +1193,7 @@ async function loadPresetConfig(presetId, { autoCompare = true } = {}) {
   }
   const text = await response.text();
   await loadDesiredConfigFromText(text, `Loaded ${preset.label}`);
+  syncIdentityFromYaml();
   log(`Loaded desired preset ${preset.label}.`);
   if (autoCompare) {
     await autoCompareIfReady(preset.label);
@@ -1339,7 +1344,7 @@ function resolvePendingAdminResponses(adminMessage) {
   state.pendingAdminResponses = remaining;
 }
 
-function waitForAdminResponse(matcher, timeoutMs = 20000) {
+function waitForAdminResponse(matcher, timeoutMs = 30000) {
   return new Promise((resolve, reject) => {
     const timeoutId = setTimeout(() => {
       state.pendingAdminResponses = state.pendingAdminResponses.filter((pending) => pending.timeoutId !== timeoutId);
@@ -1948,4 +1953,49 @@ elements.refreshDiffBtn.addEventListener("click", () => {
 });
 elements.clearLogBtn.addEventListener("click", () => {
   elements.log.textContent = "";
+});
+
+function syncIdentityToDesiredYaml() {
+  const desiredText = elements.desiredYaml.value.trim();
+  let config = {};
+
+  try {
+    if (desiredText) {
+      config = yaml.load(desiredText) || {};
+    }
+  } catch (e) {
+    log("Identity sync skipped (invalid YAML)");
+    return;
+  }
+
+  if (!config.owner) config.owner = "";
+  if (!config.owner_short) config.owner_short = "";
+
+  const longNameInput = elements.longNameInput.value.trim();
+  const shortNameInput = elements.shortNameInput.value.trim();
+
+  if (longNameInput) config.owner = longNameInput;
+  if (shortNameInput) config.owner_short = shortNameInput;
+
+  elements.desiredYaml.value = yaml.dump(config);
+}
+
+function syncIdentityFromYaml() {
+  try {
+    const parsed = yaml.load(elements.desiredYaml.value);
+    if (!parsed) return;
+
+    elements.longNameInput.value = parsed.owner ?? "";
+    elements.shortNameInput.value = parsed.owner_short ?? "";
+  } catch {}
+}
+
+elements.longNameInput.addEventListener("input", () => {
+  syncIdentityToDesiredYaml();
+  scheduleCurrentDiffRefresh();
+});
+
+elements.shortNameInput.addEventListener("input", () => {
+  syncIdentityToDesiredYaml();
+  scheduleCurrentDiffRefresh();
 });
